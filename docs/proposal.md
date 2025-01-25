@@ -11,7 +11,9 @@ Our project will focus on the world famous gambling card game, poker, more speci
 We anticipate using the proximal policy optimization (PPO) and neural fictitious self-play (NFSP) reinforcement learning algorithms to approximate the Nash equilibrium for zero-sum games, essentially training our AI by making it play against itself.
 
 Resources:
+
 https://thegradient.pub/libratus-poker/
+
 https://www.science.org/doi/10.1126/science.aao1733
 
 ## Evaluation Plan
@@ -20,8 +22,8 @@ We’ll be evaluating the AI’s performance by measuring its win/loss rate agai
 
 We will visualize our algorithm by “plugging it in” to a Python poker GUI, and playing against it. To smoke test our bot we can employ certain toy problems such as giving it the best hand in poker, a royal flush, and seeing if it decides to raise, and giving it the worst hand in poker, a high card, and seeing if it decides to fold. Additionally, we’ll test the AI in more complex situations, including cases such as the opponent continuously raising no matter what, and cases where opponents act with more randomness that comes with human nature. Ultimately, what would be ideal is that our AI will consistently outperform humans - that is to say, achieve an 80%+ win rate against us.
 
-# Meet the Instructor
+## Meet the Instructor
 The earliest meeting date for team All in N Ballin’ is in-person on Thursday, February 6 at 1:00pm (Week 5).
 
-# AI Tool Usage
+## AI Tool Usage
 No AI tools were used in the creation of this proposal. Any utilization of AI tools in the future will be reported below:
