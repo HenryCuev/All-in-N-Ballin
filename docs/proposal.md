@@ -4,7 +4,7 @@ title: Proposal
 ---
 
 ## Summary of the Project
-Our project will focus on the world famous gambling card game, poker, more specifically no-limit, heads-up (2 player) Texas Hold ‘Em Poker. We plan on leveraging an existing Python poker library to help us create our state space. Inputs to the AI will be the hand dealt, the opponent’s actions, and both players’ chip count. The AI will output one of the three legal actions in Poker: call, raise, and fold. The goal is to create an AI that will optimally play the hand dealt to it, and that will bankrupt/defeat the opponent as often as possible.
+Our project will focus on creating an AI agent to play the world famous gambling card game, poker, more specifically no-limit, heads-up (2 player) Texas Hold ‘Em Poker. We plan on leveraging an existing Python poker library to help us create our state space. Inputs to the AI will be the hand dealt, the opponent’s actions, and both players’ chip count. The AI will output one of the three legal actions in Poker: call, raise, and fold. The goal is to create an AI that will optimally play the hand dealt to it, and that will bankrupt/defeat the opponent as often as possible.
 
 ## AI/ML Algorithms
 
