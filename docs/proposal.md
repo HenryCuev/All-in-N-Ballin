@@ -3,4 +3,17 @@ layout: default
 title: Proposal
 ---
 
-paste proposal here
+## Project Summary
+...
+
+## AI/ML Algorithms
+...
+
+## Evaluation Plan
+...
+
+## Meet the Instructor
+...
+
+## AI Tool Usage
+...
