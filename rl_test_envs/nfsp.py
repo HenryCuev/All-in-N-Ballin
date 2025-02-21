@@ -2,7 +2,9 @@
 # https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/kuhn_nfsp.py
 
 
-"""NFSP agents trained on Kuhn Poker."""
+"""NFSP agents trained on Texas Hold 'Em Poker."""
+
+import pyspiel # type: ignore
 
 from absl import app # type: ignore
 from absl import flags # type: ignore
@@ -14,7 +16,25 @@ from open_spiel.python import rl_environment # type: ignore
 from open_spiel.python.algorithms import exploitability # type: ignore
 from open_spiel.python.algorithms import nfsp # type: ignore
 
+universal_poker = pyspiel.universal_poker
+
 FLAGS = flags.FLAGS
+
+CUSTOM_NO_LIMIT_HEADS_UP_TEXAS_HOLDEM_GAMEDEF = """\
+GAMEDEF
+nolimit
+numPlayers = 2
+numRounds = 4
+raiseSize = 20 20 20 20
+blind = 10 20
+firstPlayer = 1
+numSuits = 4
+numRanks = 13
+numHoleCards = 2
+numBoardCards = 0 3 1 1
+stack = 2000
+END GAMEDEF
+"""
 
 flags.DEFINE_integer("num_train_episodes", int(3e6),
                      "Number of training episodes.")
@@ -35,7 +55,9 @@ class NFSPPolicies(policy.Policy):
   """Joint policy to be evaluated."""
 
   def __init__(self, env, nfsp_policies, mode):
-    game = env.game
+    game = universal_poker.load_universal_poker_from_acpc_gamedef(
+        CUSTOM_NO_LIMIT_HEADS_UP_TEXAS_HOLDEM_GAMEDEF
+    )
     player_ids = [0, 1]
     super(NFSPPolicies, self).__init__(game, player_ids)
     self._policies = nfsp_policies

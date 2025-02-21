@@ -42,15 +42,15 @@ def main(_):
     )
 
     solver = None
-    if FLAGS.solver == "cfr":
-        solver = pyspiel.CFRSolver(game)
-    elif FLAGS.solver == "cfrplus":
-        solver = pyspiel.CFRPlusSolver(game)
-    elif FLAGS.solver == "cfrbr":
-        solver = pyspiel.CFRBRSolver(game)
-    else:
-        print("Unknown solver")
-        sys.exit(0)
+    # if FLAGS.solver == "cfr":
+    #     solver = pyspiel.CFRSolver(game)
+    # elif FLAGS.solver == "cfrplus":
+    solver = pyspiel.CFRPlusSolver(game)
+    # elif FLAGS.solver == "cfrbr":
+    #     solver = pyspiel.CFRBRSolver(game)
+    # else:
+    #     print("Unknown solver")
+    #     sys.exit(0)
 
 
     for i in range(int(_ITERATIONS.value / 2)):
