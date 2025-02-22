@@ -12,7 +12,7 @@ Project “All in N Ballin’” focuses on creating an AI agent to play no-limi
 The main algorithm we are using is Neural-Fictitious Self-Play (NFSP), described as “a deep reinforcement learning method for learning approximate Nash equilibria of imperfect-information games” (Heinrich and Silver 2020). NFSP is a hybrid between reinforcement learning and supervised imitation learning. The NFSP agents utilize reinforcement learning to train a neural network from game experiences against fellow agents to predict future moves, while also training another neural network off of its own moves against fellow agents utilizing supervised learning. From these two neural networks, agents “ cautiously [sample] its actions from a mixture of its average, routine strategy and its greedy strategy that maximizes its predicted expected value” (Heinrich and Silver 2020). NFSP is designed to optimize/minimize exploitability, for more information please refer to the Evaluation section on this page.
 
 ![sudo](./images/sudo.png)
-
+*Figure 1: NFSP Pseudocode*
 
 The implementation of our agent relies on a custom Texas Hold ‘Em gamemode created with OpenSpiel’s universal_poker game to match the poker from our problem description. The specifics of our gamemode can be seen below:
 
@@ -32,8 +32,8 @@ numBoardCards = 0 3 1 1
 stack = 2000
 END GAMEDEF
 """
-
 ```
+*Figure 2: Texas Hold 'Em Gamemode OpenSpiel Parameters*
 
 From there, we utilized the example NFSP implementation from OpenSpiel’s source code to run on our Texas Hold ‘Em game. The inputs of our approach are the state of the game, including: each agent’s hole cards, the state of the board cards, the players’ turns to be dealer, the pool chip count, and their chip count. From the inputs, the agent determines the legal actions, and returns one of four valid moves, call, raise, fold, or check. 
 
@@ -68,6 +68,7 @@ class NFSPPolicies(policy.Policy):
     prob_dict = {action: p[action] for action in legal_actions}
     return prob_dict
 ```
+*Figure 3: NFSP Implementation*
 
 
 Our NFSP implementation ran for three-million training steps, utilizing 128 neurons within the Q-net, and utilized the default hyperparameters within the NFSP algorithm in OpenSpiel. The hyperparameters were as follows:
@@ -78,15 +79,18 @@ policy update every n steps: 64
  
 ## Evaluation:
 
-The main quantitative metric we are evaluating our agent by is exploitability, which is a measure of how “well a strategy profile approximates a Nash equilibrium” with “the closer it [being] to zero, the closer the policy is to optimal” (Timbers et. al, 2022). To measure our exploitability, we called OpenSpiel’s `​​open_spiel.python.algorithms.exploitability.exploitability()` function with our game tree along our policy class instances as parameters every ten–thousand training steps. This function would then return and log the exploitability. As seen in figure TBD, our agent’s exploitability continually reduced throughout the training steps, fluctuating between .01 and .02 towards the end, and marking ~ .015 exploitability on the final step. 
+The main quantitative metric we are evaluating our agent by is exploitability, which is a measure of how “well a strategy profile approximates a Nash equilibrium” with “the closer it [being] to zero, the closer the policy is to optimal” (Timbers et. al, 2022). To measure our exploitability, we called OpenSpiel’s `​​open_spiel.python.algorithms.exploitability.exploitability()` function with our game tree along our policy class instances as parameters every ten–thousand training steps. This function would then return and log the exploitability. As seen in Figure 4, our agent’s exploitability continually reduced throughout the training steps, fluctuating between .01 and .02 towards the end, and marking ~ .015 exploitability on the final step. 
 
 ![exploitability graph](./images/exploit.png)
+*Figure 4: Exploitability of agents as a function of training steps*
 
 Another quantitative metric we tracked was the loss for both the supervised and reinforcement learning aspects of NFSP, for both agents that trained against each other. As seen in the figures below, the losses continued to fluctuate drastically throughout the training process, and neither the supervised or reinforcement learning losses converged. This is not of too much concern to us since the most important metric, exploitability, continues to decrease regardless of loss.
 
 ![rl loss graph](./images/rl_loss.png)
+*Figure 5: Reinforcement learning loss of agents as a function of training steps*
 
 ![sl loss graph](./images/sl_loss.png)
+*Figure 6: Supervised learning loss of agents as a function of training steps*
 
 ## Remaining Goals and Challenges:
 
@@ -98,20 +102,20 @@ Additionally, the loss we’ve observed is a little high, so that’s one area o
 ## Resources Used:
 
 ###### Code Documentation:
-- https://openspiel.readthedocs.io/en/latest/index.html
-- https://matplotlib.org/ 
+- [https://openspiel.readthedocs.io/en/latest/index.html](https://openspiel.readthedocs.io/en/latest/index.html)
+- [https://matplotlib.org/](https://matplotlib.org/ )
 
 ###### OpenSpiel Source Code:
-- https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/universal_poker_cfr_cpp_load_from_acpc_gamedef_example.py 
-- https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/kuhn_nfsp.py
+- [https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/universal_poker_cfr_cpp_load_from_acpc_gamedef_example.py](https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/universal_poker_cfr_cpp_load_from_acpc_gamedef_example.py)
+- [https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/kuhn_nfsp.py](https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/kuhn_nfsp.py)
 
 ###### OpenSpiel Algorithms:
-- https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/nfsp.py
-- https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/exploitability.py 
+- [https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/nfsp.py](https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/nfsp.py)
+- [https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/exploitability.py](https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/exploitability.py) 
 
 ###### Scientific Reports:
-- https://www.davidsilver.uk/wp-content/uploads/2020/03/nfsp-1.pdf 
-- https://www.ijcai.org/proceedings/2022/0484.pdf
+- [https://www.davidsilver.uk/wp-content/uploads/2020/03/nfsp-1.pdf](https://www.davidsilver.uk/wp-content/uploads/2020/03/nfsp-1.pdf )
+- [https://www.ijcai.org/proceedings/2022/0484.pdf](https://www.ijcai.org/proceedings/2022/0484.pdf)
 
 ###### Libraries:
 - OpenSpiel & dependencies (TensorFlow, NumPy, Pandas etc.)
