@@ -3,7 +3,7 @@ layout: default
 title:  Home
 ---
 
-![image](./images/poker.jpg)
+![poker image](./images/poker.jpg)
 
 ### Project Description
 

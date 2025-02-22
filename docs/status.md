@@ -3,7 +3,6 @@ layout: default
 title: Status
 ---
 
-
 ## Project Summary
 
 Project “All in N Ballin’” focuses on creating an AI agent to play no-limit, heads-up Texas Hold ‘Em Poker. We are relying on an existing Python library, Google’s OpenSpiel, to utilize its existing poker implementation, help us create our training environment, and utilize its existing implementations of reinforcement learning algorithms. The goal for our project is to create a poker agent that reduces exploitability, and therefore approximates the Nash Equilibrium as close as possible. We are mainly using the Neural-Fictitious Self-Play (NFSP) reinforced learning algorithm to reduce exploitability in our agent.
@@ -79,12 +78,13 @@ policy update every n steps: 64
 
 The main quantitative metric we are evaluating our agent by is exploitability, which is a measure of how “well a strategy profile approximates a Nash equilibrium” with “the closer it [being] to zero, the closer the policy is to optimal” (Timbers et. al, 2022). To measure our exploitability, we called OpenSpiel’s `​​open_spiel.python.algorithms.exploitability.exploitability()` function with our game tree along our policy class instances as parameters every ten–thousand training steps. This function would then return and log the exploitability. As seen in figure TBD, our agent’s exploitability continually reduced throughout the training steps, fluctuating between .01 and .02 towards the end, and marking ~ .015 exploitability on the final step. 
 
+![exploitability graph](./images/exploit.jpg)
 
 Another quantitative metric we tracked was the loss for both the supervised and reinforcement learning aspects of NFSP, for both agents that trained against each other. As seen in the figures below, the losses continued to fluctuate drastically throughout the training process, and neither the supervised or reinforcement learning losses converged. This is not of too much concern to us since the most important metric, exploitability, continues to decrease regardless of loss.
 
+![rl loss graph](./images/rl_loss.jpg)
 
-
-
+![sl loss graph](./images/sl_loss.jpg)
 
 ## Remaining Goals and Challenges:
 
@@ -95,24 +95,24 @@ Additionally, the loss we’ve observed is a little high, so that’s one area o
 
 ## Resources Used:
 
-Code Documentation:
-https://openspiel.readthedocs.io/en/latest/index.html
-https://matplotlib.org/ 
+###### Code Documentation:
+- https://openspiel.readthedocs.io/en/latest/index.html
+- https://matplotlib.org/ 
 
-OpenSpiel Source Code:
-https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/universal_poker_cfr_cpp_load_from_acpc_gamedef_example.py 
-https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/kuhn_nfsp.py
+###### OpenSpiel Source Code:
+- https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/universal_poker_cfr_cpp_load_from_acpc_gamedef_example.py 
+- https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/examples/kuhn_nfsp.py
 
-OpenSpiel Algorithms:
-https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/nfsp.py
-https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/exploitability.py 
+###### OpenSpiel Algorithms:
+- https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/nfsp.py
+- https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/exploitability.py 
 
-Scientific Reports:
-https://www.davidsilver.uk/wp-content/uploads/2020/03/nfsp-1.pdf 
-https://www.ijcai.org/proceedings/2022/0484.pdf
+###### Scientific Reports:
+- https://www.davidsilver.uk/wp-content/uploads/2020/03/nfsp-1.pdf 
+- https://www.ijcai.org/proceedings/2022/0484.pdf
 
-Libraries:
-OpenSpiel & dependencies (TensorFlow, NumPy, Pandas etc.)
-MatPlotLib
-PyTorch
-ABSL-Py
+###### Libraries:
+- OpenSpiel & dependencies (TensorFlow, NumPy, Pandas etc.)
+- MatPlotLib
+- PyTorch
+- ABSL-Py
