@@ -3,6 +3,9 @@ layout: default
 title: Status
 ---
 
+## Video Summary
+[YouTube](https://youtu.be/Pm-CzMXtNqQ)
+
 ## Project Summary
 
 Project “All in N Ballin’” focuses on creating an AI agent to play no-limit, heads-up Texas Hold ‘Em Poker. We are relying on an existing Python library, Google’s OpenSpiel, to utilize its existing poker implementation, help us create our training environment, and utilize its existing implementations of reinforcement learning algorithms. The goal for our project is to create a poker agent that reduces exploitability, and therefore approximates the Nash Equilibrium as close as possible. We are mainly using the Neural-Fictitious Self-Play (NFSP) reinforced learning algorithm to reduce exploitability in our agent.
@@ -72,10 +75,9 @@ class NFSPPolicies(policy.Policy):
 
 
 Our NFSP implementation ran for three-million training steps, utilizing 128 neurons within the Q-net, and utilized the default hyperparameters within the NFSP algorithm in OpenSpiel. The hyperparameters were as follows:
-
-reinforcement learning rate: .01
-supervised learning rate: .01
-policy update every n steps: 64 
+- reinforcement learning rate: .01
+- supervised learning rate: .01
+- policy update every n steps: 64 
  
 ## Evaluation:
 
@@ -94,7 +96,7 @@ Another quantitative metric we tracked was the loss for both the supervised and 
 
 ## Remaining Goals and Challenges:
 
-For the remainder of the quarter, our main goal is to further reduce the exploitability of our agent. We believe our prototype is still limited in its ability to approximate the Nash Equilibrium, and we believe we can further reduce our exploitability. Our plan until recently was to create a hybrid algorithm between NFSP and imitation learning, but we have already come across a few challenges for this idea. We briefly experimented with creating an imitation model that was trained using data from the Annual Computer Poker Competition, but found that getting data consistent with our specific version of poker to train the imitation agent on was a challenge, but more importantly we discovered that NFSP is itself already an imitation and reinforcement learning hybrid algorithm. This would make our former plan to improve this algorithm possible redundant and obsolete. For now, we are unsure on how to proceed, but we are meeting with the professor in a few days (from the time of writing this) for help. Once we have developed our own unique algorithm, we plan on comparing our agent to an unaltered NFSP agent, CFR agent, and an imitation agent. 
+For the remainder of the quarter, our main goal is to further reduce the exploitability of our agent. We believe our prototype is still limited in its ability to approximate the Nash Equilibrium, and we believe we can further reduce our exploitability. Our plan until recently was to create a hybrid algorithm between NFSP and imitation learning, but we have already come across a few challenges for this idea. We briefly experimented with creating an imitation model that was trained using data from the Annual Computer Poker Competition, but found that getting enough data consistent with our specific version of poker to train the imitation agent on was a challenge, but more importantly we discovered that NFSP is itself already an imitation and reinforcement learning hybrid algorithm. This would make our former plan to improve this algorithm possible redundant and obsolete. For now, we are unsure on how to proceed, but we are meeting with the professor in a few days (from the time of writing this) for help. Once we have developed our own unique algorithm, we plan on comparing our agent to an unaltered NFSP agent, CFR agent, and an imitation agent. 
 
 Additionally, the loss we’ve observed is a little high, so that’s one area our model needs to work on. Our observations show that the loss doesn’t improve much after a certain point, and we’d like to see if we could bring down the loss even more, especially if there might be a positive correlation between loss and exploitability.
 

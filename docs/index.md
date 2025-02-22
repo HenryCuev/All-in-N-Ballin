@@ -9,9 +9,10 @@ title:  Home
 
 Project “All in N Ballin’” focuses on creating an AI agent to play no-limit, heads-up Texas Hold ‘Em Poker. We are relying on an existing Python library, Google’s OpenSpiel, to utilize its existing poker implementation, help us create our training environment, and utilize its existing implementations of reinforcement learning algorithms. The goal for our project is to create a poker agent that reduces exploitability, and therefore approximates the Nash Equilibrium as close as possible. We are mainly using the Neural-Fictitious Self-Play (NFSP) reinforced learning algorithm to reduce exploitability in our agent.
 
-[Source Code](https://github.com/HenryCuev/All-in-N-Ballin)
+### Source Code
+[https://github.com/HenryCuev/All-in-N-Ballin](https://github.com/HenryCuev/All-in-N-Ballin)
 
-### Reports:
+### Reports
 
 - [Proposal](proposal.html)
 - [Status](status.html)
