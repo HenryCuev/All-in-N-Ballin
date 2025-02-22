@@ -11,6 +11,8 @@ Project “All in N Ballin’” focuses on creating an AI agent to play no-limi
 
 The main algorithm we are using is Neural-Fictitious Self-Play (NFSP), described as “a deep reinforcement learning method for learning approximate Nash equilibria of imperfect-information games” (Heinrich and Silver 2020). NFSP is a hybrid between reinforcement learning and supervised imitation learning. The NFSP agents utilize reinforcement learning to train a neural network from game experiences against fellow agents to predict future moves, while also training another neural network off of its own moves against fellow agents utilizing supervised learning. From these two neural networks, agents “ cautiously [sample] its actions from a mixture of its average, routine strategy and its greedy strategy that maximizes its predicted expected value” (Heinrich and Silver 2020). NFSP is designed to optimize/minimize exploitability, for more information please refer to the Evaluation section on this page.
 
+![sudo](./images/sudo.png)
+
 
 The implementation of our agent relies on a custom Texas Hold ‘Em gamemode created with OpenSpiel’s universal_poker game to match the poker from our problem description. The specifics of our gamemode can be seen below:
 
@@ -78,13 +80,13 @@ policy update every n steps: 64
 
 The main quantitative metric we are evaluating our agent by is exploitability, which is a measure of how “well a strategy profile approximates a Nash equilibrium” with “the closer it [being] to zero, the closer the policy is to optimal” (Timbers et. al, 2022). To measure our exploitability, we called OpenSpiel’s `​​open_spiel.python.algorithms.exploitability.exploitability()` function with our game tree along our policy class instances as parameters every ten–thousand training steps. This function would then return and log the exploitability. As seen in figure TBD, our agent’s exploitability continually reduced throughout the training steps, fluctuating between .01 and .02 towards the end, and marking ~ .015 exploitability on the final step. 
 
-![exploitability graph](./images/exploit.jpg)
+![exploitability graph](./images/exploit.png)
 
 Another quantitative metric we tracked was the loss for both the supervised and reinforcement learning aspects of NFSP, for both agents that trained against each other. As seen in the figures below, the losses continued to fluctuate drastically throughout the training process, and neither the supervised or reinforcement learning losses converged. This is not of too much concern to us since the most important metric, exploitability, continues to decrease regardless of loss.
 
-![rl loss graph](./images/rl_loss.jpg)
+![rl loss graph](./images/rl_loss.png)
 
-![sl loss graph](./images/sl_loss.jpg)
+![sl loss graph](./images/sl_loss.png)
 
 ## Remaining Goals and Challenges:
 
