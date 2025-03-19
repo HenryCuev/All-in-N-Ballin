@@ -12,7 +12,7 @@ TODO
 
 For the past 10 weeks, team All in N Ballin has been focusing on creating an AI agent to optimally play the popular card game poker, more specifically no-limit, heads-up (2-player) Texas Hold ‘Em variant.
 
-For those who may be unfamiliar with the poker variant, Texas Hold ‘Em begins with each player placing their respective blind bets, then the distribution of two cards that can only be seen by the player holding them. Over the next four betting rounds, players decide whether to fold, call, or raise, choosing the action they believe is optimal to preserving or winning chips. The winner of the game is the player that either doesn’t fold, or in the case neither player folds, the player with the best poker hand. For more details on the rules please refer (here)[https://bicyclecards.com/how-to-play/texas-holdem-poker]. Additionally, please note our implementation of poker excludes the bluffing component of poker.
+For those who may be unfamiliar with the poker variant, Texas Hold ‘Em begins with each player placing their respective blind bets, then the distribution of two cards that can only be seen by the player holding them. Over the next four betting rounds, players decide whether to fold, call, or raise, choosing the action they believe is optimal to preserving or winning chips. The winner of the game is the player that either doesn’t fold, or in the case neither player folds, the player with the best poker hand. For more details on the rules please refer [here](https://bicyclecards.com/how-to-play/texas-holdem-poker). Additionally, please note our implementation of poker excludes the bluffing component of poker.
 
 This poker variant’s state space is incredibly large and is composed of game round, board cards, hole cards, player turns/ blinds, players’ chip counts, player actions, and bet sizes. With the shuffled deck of cards alone, the state space is already fifty-two factorial in size.  However, the true absurdity of no-limit Hold ‘Em’s complexity is not just in the size of its state space, but in the vastness of its action space. Because players can bet any amount larger than the minimum bet and less than their stack (chip count), the game features a continuous action space. Additionally, Hold ‘Em is an imperfect information game, meaning there are hidden variables such as opponent cards, that complicate decision making. This results in a massive branching factor within the game tree, significantly increasing the difficulty of finding the optimal strategy, and necessitating the use of a more sophisticated problem-solving approach, such as machine learning.
 
@@ -26,7 +26,7 @@ We experimented with an imitation model utilizing convolutional neural networks 
 
 After some research, we found that the world’s best poker bots used an algorithm called  Counterfactual Regret Minimization (CFR), and decided to give it a try. CFR models work by computing the “regret”, or how much gain a player gets if they had chosen a different action, and adjust the probability of choosing an action so as to minimize the regret. Our findings indicated that this algorithm would be the optimal solution; given its nature, advantages include that it is highly accurate and performant, and it is used in many poker bots for that reason. However, the main disadvantage of this model is that it is incredibly computationally complex. Training for poker games with limits was already difficult, but training for no-limit was simply impossible in any reasonable amount of time due to its high complexity; we ran the algorithm for over twelve hours but could not make it past ten thousand training steps. Thus, another model more complex than imitation, but less complex than CFR had to be considered.
 
-<img src="/images/cfr_psuedo.png" alt="psuedo_cfr" width="200"/>
+<img src="./images/cfr_psuedo.png" alt="psuedo_cfr" width="200"/>
 
 The algorithm we finally settled on using is Neural-Fictitious Self-Play (NFSP), described as “a deep reinforcement learning method for learning approximate Nash equilibria of imperfect-information games” (Heinrich and Silver 2020). NFSP is a hybrid between reinforcement learning and supervised imitation learning. The NFSP agents utilize reinforcement learning to train a neural network from game experiences against fellow agents to predict future moves, while also training another neural network off of its own moves against fellow agents utilizing supervised learning. From these two neural networks, agents “ cautiously [sample] its actions from a mixture of its average, routine strategy and its greedy strategy that maximizes its predicted expected value” (Heinrich and Silver 2020). NFSP is designed to optimize/minimize exploitability, for more information please refer to the Evaluation section on this page.
 
@@ -137,8 +137,8 @@ Our biggest shortcoming in evaluation was the lack of qualitative assessment met
 - MatPlotLib
 - PyTorch
 - ABSL-Py
-- (SirRender00’s Texas Hold Em)[https://github.com/SirRender00/texasholdem]
-- (ACPC Poker GUI Client)[https://github.com/dmorrill10/acpc_poker_gui_client]
+- [SirRender00’s Texas Hold Em](https://github.com/SirRender00/texasholdem)
+- [ACPC Poker GUI Client](https://github.com/dmorrill10/acpc_poker_gui_client)
 
 ## AI Tool Usage: 
 
