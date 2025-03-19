@@ -19,4 +19,4 @@ Responsible For: CFR Model Implementation + NFSP Implementation (~25%)
 ## Joonhyuk Song
 ***UCI Net ID***: joonhys
 
-Responsible For: Imitatio Model Implementation + NFSP Implementation (~25%)
+Responsible For: Imitation Model Implementation + NFSP Implementation (~25%)
