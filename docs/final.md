@@ -26,11 +26,12 @@ We experimented with an imitation model utilizing convolutional neural networks 
 
 After some research, we found that the world’s best poker bots used an algorithm called  Counterfactual Regret Minimization (CFR), and decided to give it a try. CFR models work by computing the “regret”, or how much gain a player gets if they had chosen a different action, and adjust the probability of choosing an action so as to minimize the regret. Our findings indicated that this algorithm would be the optimal solution; given its nature, advantages include that it is highly accurate and performant, and it is used in many poker bots for that reason. However, the main disadvantage of this model is that it is incredibly computationally complex. Training for poker games with limits was already difficult, but training for no-limit was simply impossible in any reasonable amount of time due to its high complexity; we ran the algorithm for over twelve hours but could not make it past ten thousand training steps. Thus, another model more complex than imitation, but less complex than CFR had to be considered.
 
-<img src="./images/cfr_psuedo.png" alt="psuedo_cfr" width="200"/>
+<img src="./images/cfr_psuedo.png" alt="psuedo_cfr" width="400"/>
 
 The algorithm we finally settled on using is Neural-Fictitious Self-Play (NFSP), described as “a deep reinforcement learning method for learning approximate Nash equilibria of imperfect-information games” (Heinrich and Silver 2020). NFSP is a hybrid between reinforcement learning and supervised imitation learning. The NFSP agents utilize reinforcement learning to train a neural network from game experiences against fellow agents to predict future moves, while also training another neural network off of its own moves against fellow agents utilizing supervised learning. From these two neural networks, agents “ cautiously [sample] its actions from a mixture of its average, routine strategy and its greedy strategy that maximizes its predicted expected value” (Heinrich and Silver 2020). NFSP is designed to optimize/minimize exploitability, for more information please refer to the Evaluation section on this page.
 
-![psuedo nfsp](./images/sudo.png)
+<img src="./images/sudo.png" alt="psuedo_nfsp" width="400"/>
+
 *Figure 1: NFSP Pseudocode*
 
 The implementation of our agent relies on a custom Texas Hold ‘Em gamemode created with OpenSpiel’s universal_poker game to match the poker from our problem description. The specifics of our gamemode can be seen below:
@@ -99,15 +100,17 @@ Our NFSP implementation ran for three-million training steps, utilizing 128 neur
 
 Our team evaluated the agent both quantitatively and qualitatively. The first quantitative measure of our agent’s performance is the approximate exploitability, which is a measure of how “well a strategy profile approximates a Nash equilibrium” with “the closer it [being] to zero, the closer the policy is to optimal” (Timbers et. al, 2022). The main quantitative metric we are evaluating our agent by is exploitability, To measure our exploitability, we called OpenSpiel’s ​​open_spiel.python.algorithms.exploitability.exploitability() function with our game tree along our policy class instances as parameters every ten–thousand training steps. This function would then return and log the exploitability. As seen in Figure 4, our agent’s exploitability continually reduced throughout the training steps, fluctuating between .01 and .02 towards the end, and marking ~ .015 exploitability on the final step.
 
-![gui](./images/acpc_gui.png)
+<img src="./images/acpc_gui.png" alt="gui" width="400"/>
 
 Another quantitative metric we tracked was the loss for the NFSP agent. When we discussed loss in our progress report a few weeks ago it was fluctuating wildly, but interesting enough it seems we were able to stabilize the loss. Loss began extremely high but lowered to around 0.2 after about 0.25 million training episodes, then oscillated between about 0.1 and 0.3. Since our progress report, we were able to stabilize the wild fluctuations in loss that our agent experienced. We theorize this is due to a change in the way we trained our model; previously, we had two different agents playing against each other, with one agent always going first. This was altered to have the agents take turns of who goes first so that the agent isn’t trained with only going first or only going second, and thus the agent generalizes better. The loss for our agent was retrieved by using open_spiel’s NFSP agent as a base for our implementation, and calling the already implemented `.loss` method.
 
-![loss](./images/stable_loss.png)
+<img src="./images/stable_loss.png" alt="loss" width="400"/>
+
 
 Our biggest shortcoming in evaluation was the lack of qualitative assessment methods. In the final phase of our project, we attempted to implement a GUI that would allow real-time gameplay against our agent, enabling us to gauge its performance against players of varying skill levels. However, we were unable to accomplish this. Initially, we tried using the ACPC GUI client, which supports "plug and play" integration with our agent and poker instance. However, since we trained and stored our bot in the HPC3 environment, we lacked the necessary permissions to install required software like Ruby-Bundle, which the ACPC GUI client depended on. Upon realizing this, we attempted to adapt SirRender00’s Poker GUI to work with ACPC’s protocol. Unfortunately, the implementation of this GUI was significantly different from ACPC’s protocol, making it infeasible to adapt within our remaining time. Had we known the ACPC GUI wouldn’t work, we would have prioritized the GUI more.
 
-![exploit](./images/exploit.png)
+<img src="./images/exploit.png" alt="exploit" width="400"/>
+
 
 ## Resources Used:
 
