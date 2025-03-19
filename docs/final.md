@@ -3,10 +3,10 @@ layout: default
 title: Final Report
 ---
 
-## Video: 
+## Video
 [Link](https://youtu.be/arcjUgzfG74)
 
-## Project Summary:
+## Project Summary
 
 ![banner](./images/banner.png)
 
@@ -18,7 +18,7 @@ This poker variant’s state space is incredibly large and is composed of game r
 
 Our team experimented with several algorithms of varying complexity to tackle the Hold'em problem before landing on the Neural-Fictitious Self-Play (NFSP) reinforcement learning algorithm, a hybrid imitation-reinforcement learning approach. Our initial goal was to approximate the Nash equilibrium as closely as possible, thereby achieving optimal play. To quantitatively assess the performance of our agent, we have reviewed our approximate exploitability and loss. For qualitative evaluation, we are integrating the agent with a graphical user interface (GUI) that allows us to directly play against it and gauge how well it performs in “live” gameplay.
 
-## Approaches: 
+## Approaches
 
 Throughout our project we experimented with three major different models to try and solve the optimal playing strategy for Hold ‘Em. These models were imitation CNN, counterfactual regret minimization (CFR), and neuro-fictitious self play (NFSP). 
 
@@ -97,7 +97,7 @@ Our NFSP implementation ran for three-million training steps, utilizing 128 neur
 - supervised learning rate: .01
 - policy update every n steps: 64 
 
-## Evaluation: 
+## Evaluation
 
 Our team evaluated the agent both quantitatively and qualitatively. The first quantitative measure of our agent’s performance is the approximate exploitability, which is a measure of how “well a strategy profile approximates a Nash equilibrium” with “the closer it [being] to zero, the closer the policy is to optimal” (Timbers et. al, 2022). The main quantitative metric we are evaluating our agent by is exploitability, To measure our exploitability, we called OpenSpiel’s ​​open_spiel.python.algorithms.exploitability.exploitability() function with our game tree along our policy class instances as parameters every ten–thousand training steps. This function would then return and log the exploitability. As seen in Figure 4, our agent’s exploitability continually reduced throughout the training steps, fluctuating between .01 and .02 towards the end, and marking ~ .015 exploitability on the final step. However, there is one caveat, OpenSpiel has to traverse the entire game tree to find the exploitability, so just like CFR, it becomes impossible with large starting chip counts, thus Figure 4 is the exploitability with a starting stack of 10 and min bet of 1, thus our exploitability on higher stacks may be higher.
 
@@ -118,7 +118,7 @@ Our biggest shortcoming in evaluation was the lack of qualitative assessment met
 *Figure 6: ACPC GUI Screenshot*
 
 
-## Resources Used:
+## References
 
 ###### Code Documentation:
 - [https://openspiel.readthedocs.io/en/latest/index.html](https://openspiel.readthedocs.io/en/latest/index.html)
@@ -149,6 +149,6 @@ Our biggest shortcoming in evaluation was the lack of qualitative assessment met
 - [SirRender00’s Texas Hold Em](https://github.com/SirRender00/texasholdem)
 - [ACPC Poker GUI Client](https://github.com/dmorrill10/acpc_poker_gui_client)
 
-## AI Tool Usage: 
+## AI Tool Usage
 
 We only used AI minimally for broad conceptual questions about certain reinforcement-learning algorithms. Due to the nature of LLMs, AI tools were not of any technical use to our team throughout the project. Our project utilizes niche algorithms and libraries that AI is not sufficiently trained on, thus any help we received for our code came directly from class resources and library documentation.
