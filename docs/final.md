@@ -4,7 +4,7 @@ title: Final Report
 ---
 
 ## Video: 
-TODO
+[Link](https://youtu.be/arcjUgzfG74)
 
 ## Project Summary:
 
